@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form action="{% url politiekeagenda.views.save_config %}" method="POST">
+    {% csrf_token %}
+    <div>Keywords:</div>
+    <textarea style="width: 700px; height: 200px;" name="config.value">{{keywords_raw}}</textarea>
+    <div>
+        <input type="submit" value="Save"/>
+    </div>
+</form>
+{% endblock %}

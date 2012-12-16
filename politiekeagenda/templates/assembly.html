@@ -1,0 +1,75 @@
+<div class="assembly {{ assembly.latest_revision.is_match|yesno:"match," }}" style="{{assembly.latest_revision.is_match|yesno:",display: none;" }}">
+    <div style="clear: both;"><a href="{{ assembly.url }}">{{ assembly.url }}</a></div>
+    {% if assembly.house %}
+        <div class="row"><span class="label">House:</span>
+            <span>
+            {% if assembly.house == "house" %}
+                House of Representatives
+            {% elif assembly.house == "senate" %}
+                Senate
+            {% endif %}
+            </span>
+        </div>
+    {% endif %}
+    {% if assembly.type %}
+        <div class="row"><span class="label">Type:</span><span>{{ assembly.type }}</span></div>
+    {% endif %}
+    <div class="row">
+        <span class="label">Date:</span>
+        <span>
+            {% if assembly.latest_revision.time_period == "week" %} 
+                week of
+            {% endif %}
+            {{ assembly.latest_revision.date_str }}
+        </span>
+    </div>
+    {% if assembly.latest_revision.start_time %}
+        <div class="row">
+            <span class="label">Time:</span>
+            <span class="start-time">{{ assembly.latest_revision.start_time_str }}</span>
+            {% if assembly.latest_revision.end_time %} 
+                <span>- <span class="end-time">{{ assembly.latest_revision.end_time_str }}</span></span>
+            {% endif %}
+            </div>
+    {% endif %}
+    {% if assembly.latest_revision.parlisnumber %}
+        <div class="row"><span class="label">Parlisnumber:</span><span>{{ assembly.latest_revision.parlisnumber }}</span></div>
+    {% endif %}
+    {% if assembly.latest_revision.status %}
+        <div class="row"><span class="label">Status:</span><span>{{ assembly.latest_revision.status }}</span></div>
+    {% endif %}
+    {% if assembly.latest_revision.is_public %}
+        <div class="row"><span class="label">Is public:</span><span>{{ assembly.latest_revision.is_public }}</span></div>
+    {% endif %}
+    {% if assembly.latest_revision.location %}
+        <div class="row"><span class="label">Location:</span><span>{{ assembly.latest_revision.location }}</span></div>
+    {% endif %}
+    {% if assembly.latest_revision.variety %}
+        <div class="row"><span class="label">Type:</span><span>{{ assembly.latest_revision.variety }}</span></div>
+    {% endif %}
+    {% if assembly.latest_revision.committee %}
+        <div class="row"><span class="label">Committee:</span><span>{{ assembly.latest_revision.committee }}</span></div>
+    {% endif %}
+    {% if assembly.latest_revision.summary %}
+        <div class="row"><span class="label">Summary:</span><span>{{ assembly.latest_revision.summary_highlighted|safe }}</span></div>
+    {% endif %}
+    
+    {% if assembly.latest_revision.is_match %}
+        <div class="row"><span class="label">Keywords matched:</span><span class="highlight">{{ assembly.latest_revision.keywords_matched|join:", " }}</span></div>
+    {% endif %}
+    
+    <!--
+    <div style="clear:both;" class="actions">
+        <button class="details-expander">Expand</button>
+        <button class="track" data-assembly_id="{{ assembly.id }}">Track</button>
+        <button class="ignore" data-assembly_id="{{ assembly.id }}">Ignore</button>
+        <button class="clear" data-assembly_id="{{ assembly.id }}">Clear</button>
+    </div>
+    -->
+    
+    <div class="details" style="clear: both;">
+<pre style="white-space: pre-wrap;">
+{{ assembly.latest_revision.details_text_highlighted|safe }}
+</pre>
+    </div>
+</div>

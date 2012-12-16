@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style type="text/css">
+.assembly .row {
+    clear: both;
+}
+
+.assembly .label {
+    display: block;
+    float: left;
+    width: 200px;
+}
+
+.highlight {
+    background-color: #95fffd;
+    color: #000;
+}
+
+</style>
+
+<div style="margin-bottom: 1em;">Keywords: <span id="keywords">{{keywords_raw}}</span> (<a href="{% url politiekeagenda.views.config %}">change</a>)</div>
+
+<!--
+<div style="margin-bottom: 1em;">
+    <button onclick='$(".assembly").show();'>Show all</button>
+    <button onclick='$(".assembly:not(.match)").hide();'>Filter</button>
+    <button onclick='$(".assembly .details").show();'>Expand all</button>
+    <button onclick='$(".assembly .details").hide();'>Collapse all</button>
+</div>
+-->
+
+{% for assembly in assemblies %}
+{% include "assembly.html" with assembly=assembly %}
+{% endfor %}
+{% endblock %}
