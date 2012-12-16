@@ -7,7 +7,6 @@ import time
 from datetime import datetime, timedelta
 
 import models
-import forms
 
 def index(request):
     assemblies = (models.Assembly.objects
