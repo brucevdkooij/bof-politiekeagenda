@@ -22,18 +22,18 @@ class Assembly(models.Model):
     ignore = models.IntegerField(null=True, blank=True)
     type = models.TextField(blank=True)
     missing = models.IntegerField(null=True, blank=True)
-    latest_revision_id = models.IntegerField(null=True, blank=True)
     
-    latest_revision = models.OneToOneField("Revision")
+    latest_revision_id = models.IntegerField()
+    latest_revision = models.ForeignKey("Revision", db_column="latest_revision_id")
     
     class Meta:
         db_table = u'assemblies'
 
 class Revision(models.Model):
-    id = models.IntegerField(null=True, blank=True)
+    id = models.IntegerField()
     date = models.IntegerField(null=True, blank=True)
     parlisnumber = models.TextField(blank=True)
-    status = models.IntegerField(null=True, blank=True)
+    status = models.TextField(null=True, blank=True)
     is_public = models.IntegerField(null=True, blank=True)
     location = models.TextField(blank=True)
     variety = models.TextField(blank=True)
@@ -43,6 +43,7 @@ class Revision(models.Model):
     start_time = models.IntegerField(null=True, blank=True)
     end_time = models.IntegerField(null=True, blank=True)
     time_period = models.TextField(blank=True)
+    
     revision_id = models.IntegerField(primary_key=True, blank=True)
     
     class Meta:
